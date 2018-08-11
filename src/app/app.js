@@ -4,7 +4,7 @@ import RoomPage from "./roomPage"
 import firebase from "firebase"
 import { config } from "../superSecretFile"
 import "../App.css"
-import { getQueryParameter, addUrlParameter } from "./utils/urlParser"
+import { getQueryParameter } from "./utils/urlParser"
 import { Page } from "./constants/page"
 
 class App extends Component {

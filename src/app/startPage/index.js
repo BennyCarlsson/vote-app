@@ -3,6 +3,7 @@ import { Button } from "semantic-ui-react"
 import firebase from "firebase"
 import { addUrlParameter } from "../utils/urlParser"
 import { Page } from "../constants/page"
+
 export default class StartPage extends React.Component {
   updateUrl = id => {
     if (!window.history.pushState) {
