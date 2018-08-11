@@ -16,16 +16,28 @@ class App extends Component {
   }
 
   changePage = page => {
-    console.log("asd", page)
     this.setState({ page: page })
   }
 
   componentDidMount() {
     firebase.initializeApp(config)
+    this.login()
     const roomId = getQueryParameter("room")
     if (roomId) {
       this.setState({ page: Page.RoomPage })
     }
+  }
+
+  login() {
+    firebase
+      .auth()
+      .signInAnonymously()
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code
+        var errorMessage = error.message
+        // ...
+      })
   }
 
   render() {
