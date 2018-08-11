@@ -1,7 +1,7 @@
 import React from "react"
 import { Button } from "semantic-ui-react"
 import firebase from "firebase"
-import { addUrlParameter } from "../utils/urlParser"
+import { addUrlParameter, getNewId } from "../utils"
 import { Page } from "../constants/page"
 
 export default class StartPage extends React.Component {
@@ -13,21 +13,24 @@ export default class StartPage extends React.Component {
     addUrlParameter("room", id)
   }
 
-  createVote = id => {
+  createVote = async () => {
+    const id = await getNewId()
+    console.log("id", id)
     this.props.changePage(Page.RoomPage)
-    this.updateUrl(123)
+    this.updateUrl(id)
     firebase
       .database()
       .ref("rooms/" + id)
       .set({
-        question: "Vad ska vi äta idag?",
+        question: "Question!",
         timeStamp: new Date().getTime()
       })
   }
 
   render() {
+    global.asd = () => this.createVote()
     return (
-      <Button size="massive" onClick={() => this.createVote(123)}>
+      <Button size="massive" onClick={() => this.createVote()}>
         Create Vote!
       </Button>
     )
