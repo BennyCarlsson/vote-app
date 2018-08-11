@@ -23,13 +23,13 @@ export default class RoomPage extends React.Component {
     this.setState({ roomRef: ref })
     ref.on("value", snapshot => {
       const value = snapshot.val()
+      console.log("socket", value)
       this.setState({ question: value.question })
     })
   }
 
   onQuestionUpdate = question => {
-    console.log("question ", question)
-    this.state.roomRef.set({
+    this.state.roomRef.update({
       question
     })
   }
@@ -41,7 +41,7 @@ export default class RoomPage extends React.Component {
         <Input
           size="massive"
           placeholder="Add question"
-          defaultValue={this.state.question}
+          value={this.state.question}
           onChange={event => this.onQuestionUpdate(event.target.value)}
         />
       </div>
