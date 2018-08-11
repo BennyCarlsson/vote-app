@@ -7,7 +7,7 @@ export default class AddSuggestion extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newQuestion: "",
+      newSuggestion: "",
       roomRef: undefined
     }
   }
@@ -20,8 +20,13 @@ export default class AddSuggestion extends React.Component {
   }
 
   onAddingSuggestion() {
-    this.state.roomRef.push(this.state.newQuestion)
-    this.setState({ newQuestion: "" })
+    if (this.state.newSuggestion) {
+      this.state.roomRef.push({
+        suggestion: this.state.newSuggestion,
+        votes: 0
+      })
+    }
+    this.setState({ newSuggestion: "" })
   }
 
   render() {
@@ -31,8 +36,8 @@ export default class AddSuggestion extends React.Component {
           <Form.Field>
             <input
               placeholder="Add new suggestion"
-              onChange={e => this.setState({ newQuestion: e.target.value })}
-              value={this.state.newQuestion}
+              onChange={e => this.setState({ newSuggestion: e.target.value })}
+              value={this.state.newSuggestion}
             />
           </Form.Field>
           <Button type="submit">Submit</Button>

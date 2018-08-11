@@ -15,8 +15,6 @@ export default class StartPage extends React.Component {
 
   createVote = async () => {
     const id = await getNewId()
-    console.log("id", id)
-    this.props.changePage(Page.RoomPage)
     this.updateUrl(id)
     firebase
       .database()
@@ -25,6 +23,7 @@ export default class StartPage extends React.Component {
         question: "Question!",
         timeStamp: new Date().getTime()
       })
+    this.props.changePage(Page.RoomPage)
   }
 
   render() {

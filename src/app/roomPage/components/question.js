@@ -22,7 +22,9 @@ export default class Question extends React.Component {
 
     ref.on("value", snapshot => {
       const value = snapshot.val()
-      this.setState({ question: value.question })
+      if (value) {
+        this.setState({ question: value.question })
+      }
     })
   }
 
