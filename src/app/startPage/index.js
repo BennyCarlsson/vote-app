@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "semantic-ui-react"
+import { Button, Input, Divider } from "semantic-ui-react"
 import firebase from "firebase"
 import { addUrlParameter, getNewId } from "../utils"
 import { Page } from "../constants/page"
@@ -30,9 +30,39 @@ export default class StartPage extends React.Component {
   render() {
     global.asd = () => this.createVote()
     return (
-      <Button size="massive" onClick={() => this.createVote()}>
-        Create Vote!
-      </Button>
+      <div style={styles.container}>
+        <div>
+          <Button
+            primary
+            style={{ backgroundColor: "#4dd0e1" }}
+            size="massive"
+            onClick={() => this.createVote()}
+          >
+            Create Vote!
+          </Button>
+        </div>
+        <div>
+          <Divider horizontal>or join a vote</Divider>
+        </div>
+        <div>
+          <Input
+            focus
+            size="massive"
+            icon={{ name: "sign in", style: { color: "#f44336" } }}
+            iconPosition="left"
+            placeholder="Enter vote code.."
+          />
+        </div>
+      </div>
     )
+  }
+}
+
+const styles = {
+  container: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
   }
 }
