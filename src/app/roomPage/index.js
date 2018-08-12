@@ -1,5 +1,4 @@
 import React from "react"
-import firebase from "firebase"
 import Question from "./components/question"
 import AddSuggestion from "./components/AddSuggestion"
 import { getQueryParameter } from "../utils/urlParser"

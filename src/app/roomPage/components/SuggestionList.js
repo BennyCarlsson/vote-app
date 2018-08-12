@@ -31,7 +31,7 @@ export default class SuggestionList extends React.Component {
 
   render() {
     return (
-      <List animated verticalAlign="middle" sty>
+      <List animated verticalAlign="middle">
         {this.state.suggestions ? (
           Object.keys(this.state.suggestions).map((suggestionKey, index) => (
             <Suggestion
