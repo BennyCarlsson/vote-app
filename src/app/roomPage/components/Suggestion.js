@@ -6,8 +6,17 @@ import { getQueryParameter } from "../../utils/urlParser"
 export default class Suggestion extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      userId: ""
+    }
   }
-  componentDidMount() {}
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ userId: user.uid })
+      }
+    })
+  }
 
   onPlacingVote() {
     const ref = firebase
@@ -16,9 +25,10 @@ export default class Suggestion extends React.Component {
         "rooms/" +
           getQueryParameter("room") +
           "/suggestions/" +
-          this.props.suggestionId
+          this.props.suggestionId +
+          "/votes"
       )
-    ref.update({ votes: this.props.votes + 1 })
+    ref.push(this.state.userId)
   }
 
   render() {
@@ -30,7 +40,8 @@ export default class Suggestion extends React.Component {
         <Icon name="thumbs up outline" />
         <List.Content>
           <List.Header>
-            {this.props.text} &nbsp;&nbsp;&nbsp; {this.props.votes}
+            {this.props.text} &nbsp;&nbsp;&nbsp;{" "}
+            {Object.keys(this.props.votes).length}
           </List.Header>
         </List.Content>
       </List.Item>
