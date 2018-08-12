@@ -20,7 +20,7 @@ export default class StartPage extends React.Component {
       .database()
       .ref("rooms/" + id)
       .set({
-        question: "Question!",
+        question: "",
         timeStamp: new Date().getTime()
       })
     this.props.changePage(Page.RoomPage)
