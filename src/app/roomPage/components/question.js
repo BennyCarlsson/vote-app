@@ -38,6 +38,7 @@ export default class Question extends React.Component {
     return (
       <div>
         <Input
+          transparent
           style={styles.inputField}
           size="massive"
           placeholder="Add question"

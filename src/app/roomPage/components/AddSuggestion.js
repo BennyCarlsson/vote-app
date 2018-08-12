@@ -1,6 +1,6 @@
 import React from "react"
 import firebase from "firebase"
-import { Input, Form, Button } from "semantic-ui-react"
+import { Input, Form } from "semantic-ui-react"
 import { getQueryParameter } from "../../utils/urlParser"
 
 export default class AddSuggestion extends React.Component {
@@ -34,13 +34,19 @@ export default class AddSuggestion extends React.Component {
       <div>
         <Form onSubmit={() => this.onAddingSuggestion()}>
           <Form.Field>
-            <input
+            <Input
+              icon={{
+                name: "send",
+                link: true,
+                size: "large",
+                style: { color: "#4dd0e1" },
+                onClick: () => this.onAddingSuggestion()
+              }}
               placeholder="Add new suggestion"
               onChange={e => this.setState({ newSuggestion: e.target.value })}
               value={this.state.newSuggestion}
             />
           </Form.Field>
-          <Button type="submit">Submit</Button>
         </Form>
       </div>
     )

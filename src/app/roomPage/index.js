@@ -21,7 +21,7 @@ export default class RoomPage extends React.Component {
   render() {
     return (
       <div>
-        <h1>Welcome to voting room {this.state.roomId}</h1>
+        <h3>Voting name:{this.state.roomId}</h3>
         <Question roomId={this.state.roomId} />
         <SuggestionList style={StyleSheet.suggestionList} />
         <AddSuggestion />

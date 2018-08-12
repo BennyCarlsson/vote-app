@@ -42,7 +42,6 @@ export const getNewId = async () => {
     .ref("rooms/" + newId)
     .once("value", snapshot => {
       if (snapshot.exists()) {
-        e.log(true)
         exists = true
       } else {
         exists = false
