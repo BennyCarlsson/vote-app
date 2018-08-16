@@ -3,6 +3,7 @@ import firebase from "firebase"
 import { Button } from "semantic-ui-react"
 import { addUrlParameter, getNewId } from "../../utils"
 import { Page } from "../../constants/page"
+import { LASTING_MINUTES } from "../../constants/configs"
 
 export default class CreateVoteButton extends React.Component {
   updateUrl = id => {
@@ -21,7 +22,7 @@ export default class CreateVoteButton extends React.Component {
       .ref("rooms/" + id)
       .set({
         question: "",
-        timeStamp: new Date().getTime()
+        expires: new Date().getTime() + 60000 * LASTING_MINUTES
       })
     this.props.changePage(Page.RoomPage)
   }

@@ -19,24 +19,43 @@ export default class Suggestion extends React.Component {
   }
 
   onPlacingVote() {
-    const ref = firebase
+    const roomId = getQueryParameter("room")
+    this.removeUsersLastVote()
+    const addRef = firebase
       .database()
       .ref(
-        "rooms/" +
-          getQueryParameter("room") +
-          "/suggestions/" +
-          this.props.suggestionId +
-          "/votes"
+        "rooms/" + roomId + "/suggestions/" + this.props.suggestionId + "/votes"
       )
-    ref.push(this.state.userId)
+    addRef.push(this.state.userId)
+  }
+
+  removeUsersLastVote = () => {
+    const roomId = getQueryParameter("room")
+    firebase
+      .database()
+      .ref("rooms/" + roomId + "/suggestions/")
+      .once("value")
+      .then(snapshot => {
+        const data = snapshot.val()
+        Object.keys(data).forEach(key => {
+          const suggestionObject = data[key]
+          for (let voteId in suggestionObject.votes) {
+            if (suggestionObject.votes[voteId] === this.state.userId) {
+              firebase
+                .database()
+                .ref(
+                  "rooms/" + roomId + "/suggestions/" + key + "/votes/" + voteId
+                )
+                .remove()
+            }
+          }
+        })
+      })
   }
 
   render() {
     return (
-      <List.Item
-        style={StyleSheet.container}
-        onClick={() => this.onPlacingVote()}
-      >
+      <List.Item style={styles.container} onClick={() => this.onPlacingVote()}>
         <Icon name="thumbs up outline" />
         <List.Content>
           <List.Header>

@@ -3,6 +3,7 @@ import firebase from "firebase"
 import { Input, Form } from "semantic-ui-react"
 import { addUrlParameter } from "../../utils"
 import { Page } from "../../constants/page"
+import { NO_ROOM_FOUND } from "../../constants/errorCodes"
 
 export default class FindVoteInput extends React.Component {
   constructor(props) {
@@ -20,7 +21,6 @@ export default class FindVoteInput extends React.Component {
   }
 
   findRoom = async () => {
-    console.log("finding room")
     const roomId = this.state.input
     // Todo roomids is case sensitive
     // Todo duplicate in ../utils extract it to a function there
@@ -32,7 +32,7 @@ export default class FindVoteInput extends React.Component {
           this.updateUrl(roomId)
           this.props.changePage(Page.RoomPage)
         } else {
-          console.log("room id doesn't exist")
+          window.location.href = "/?errorCode=" + NO_ROOM_FOUND
         }
       })
   }

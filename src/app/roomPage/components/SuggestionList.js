@@ -37,7 +37,7 @@ export default class SuggestionList extends React.Component {
             <Suggestion
               text={this.state.suggestions[suggestionKey].suggestion}
               suggestionId={suggestionKey}
-              votes={this.state.suggestions[suggestionKey].votes}
+              votes={this.state.suggestions[suggestionKey].votes || {}}
               key={index}
             />
           ))
