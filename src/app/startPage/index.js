@@ -30,7 +30,7 @@ export default class StartPage extends React.Component {
           <CreateVoteButton changePage={this.props.changePage} />
         </div>
         <div>
-          <Divider horizontal>or join a vote</Divider>
+          <Divider horizontal>or join a room</Divider>
         </div>
         <div>
           <FindVoteInput changePage={this.props.changePage} />

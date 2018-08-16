@@ -35,7 +35,7 @@ export default class CreateVoteButton extends React.Component {
         size="massive"
         onClick={() => this.createVote()}
       >
-        Create Vote!
+        Create a Voting room!
       </Button>
     )
   }

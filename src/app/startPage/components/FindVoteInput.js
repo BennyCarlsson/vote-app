@@ -46,7 +46,7 @@ export default class FindVoteInput extends React.Component {
           size="massive"
           icon={{ name: "sign in", style: { color: "#f44336" } }}
           iconPosition="left"
-          placeholder="Enter vote code.."
+          placeholder="Enter code.."
           value={this.state.input}
         />
       </Form>
