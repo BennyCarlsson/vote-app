@@ -4,16 +4,20 @@
   "private": true,
   "dependencies": {
     "firebase": "^5.3.1",
+    "gh-pages": "^1.2.0",
     "react": "^16.4.2",
     "react-countdown-clock": "^2.4.0",
     "react-dom": "^16.4.2",
     "react-scripts": "1.1.4",
     "semantic-ui-react": "^0.82.2"
   },
+  "homepage": "https://bennycarlsson.github.io/my-app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
