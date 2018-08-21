@@ -11,7 +11,7 @@
     "react-scripts": "1.1.4",
     "semantic-ui-react": "^0.82.2"
   },
-  "homepage": "https://bennycarlsson.github.io/my-app",
+  "homepage": "https://bennycarlsson.github.io/vote-app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
