@@ -28,9 +28,12 @@ export default class Result extends React.Component {
 
   setValues = data => {
     const question = data.question
-
+    console.log(data)
     const suggestions = Object.values(data.suggestions).sort((a, b) => {
-      return Object.keys(a.votes).length < Object.keys(b.votes).length
+      return (
+        (a.votes ? Object.keys(a.votes).length : 0) <
+        (b.votes ? Object.keys(b.votes).length : 0)
+      )
     })
     const voteMax = Object.keys(suggestions[0].votes).length
     this.setState({ question, suggestions, voteMax, loaded: true })
@@ -44,7 +47,9 @@ export default class Result extends React.Component {
         <div style={styles.content}>
           {this.state.loaded ? (
             this.state.suggestions.map((suggestion, index) => {
-              const numberOfVotes = Object.keys(suggestion.votes).length
+              const numberOfVotes = suggestion.votes
+                ? Object.keys(suggestion.votes).length
+                : 0
               if (numberOfVotes === this.state.voteMax) {
                 return (
                   <Segment
