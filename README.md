@@ -1,9 +1,9 @@
 # Simple Vote App
 
-## Create a question
+- ## Create a question
 
-## Share link or name
+- ## Share link or name
 
-## 7min until vote closes
+- ## 7min until vote closes
 
-## [Try it out](https://bennycarlsson.github.io)
+## [Try it out live](https://bennycarlsson.github.io/vote-app)
