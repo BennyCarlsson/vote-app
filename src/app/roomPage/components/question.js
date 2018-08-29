@@ -1,13 +1,13 @@
-import React from "react"
-import { Input } from "semantic-ui-react"
-import firebase from "firebase"
-import { getQueryParameter } from "../../utils/urlParser"
+import React from 'react'
+import { Input } from 'semantic-ui-react'
+import firebase from 'firebase'
+import { getQueryParameter } from '../../utils/urlParser'
 
 export default class Question extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      question: "",
+      question: '',
       roomRef: undefined
     }
   }
@@ -17,10 +17,10 @@ export default class Question extends React.Component {
   }
 
   initDatabaseSocket = () => {
-    const ref = firebase.database().ref("rooms/" + getQueryParameter("room"))
+    const ref = firebase.database().ref('rooms/' + getQueryParameter('room'))
     this.setState({ roomRef: ref })
 
-    ref.on("value", snapshot => {
+    ref.on('value', snapshot => {
       const value = snapshot.val()
       if (value) {
         this.setState({ question: value.question })
@@ -36,8 +36,9 @@ export default class Question extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={styles.container}>
         <Input
+          className="questionInput"
           transparent
           style={styles.inputField}
           size="massive"
@@ -51,7 +52,11 @@ export default class Question extends React.Component {
 }
 
 const styles = {
+  container: {
+    width: '100%'
+  },
   inputField: {
-    minWidth: "60%"
+    minWidth: '60%',
+    textAlign: 'center'
   }
 }

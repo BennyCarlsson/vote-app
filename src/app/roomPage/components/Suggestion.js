@@ -1,13 +1,14 @@
-import React from "react"
-import { List, Icon } from "semantic-ui-react"
-import firebase from "firebase"
-import { getQueryParameter } from "../../utils/urlParser"
+import React from 'react'
+import { List, Icon } from 'semantic-ui-react'
+import firebase from 'firebase'
+import { getQueryParameter } from '../../utils/urlParser'
+import colors from '../../constants/colors'
 
 export default class Suggestion extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      userId: ""
+      userId: ''
     }
   }
   componentDidMount() {
@@ -19,22 +20,22 @@ export default class Suggestion extends React.Component {
   }
 
   onPlacingVote() {
-    const roomId = getQueryParameter("room")
+    const roomId = getQueryParameter('room')
     this.removeUsersLastVote()
     const addRef = firebase
       .database()
       .ref(
-        "rooms/" + roomId + "/suggestions/" + this.props.suggestionId + "/votes"
+        'rooms/' + roomId + '/suggestions/' + this.props.suggestionId + '/votes'
       )
     addRef.push(this.state.userId)
   }
 
   removeUsersLastVote = () => {
-    const roomId = getQueryParameter("room")
+    const roomId = getQueryParameter('room')
     firebase
       .database()
-      .ref("rooms/" + roomId + "/suggestions/")
-      .once("value")
+      .ref('rooms/' + roomId + '/suggestions/')
+      .once('value')
       .then(snapshot => {
         const data = snapshot.val()
         Object.keys(data).forEach(key => {
@@ -44,7 +45,7 @@ export default class Suggestion extends React.Component {
               firebase
                 .database()
                 .ref(
-                  "rooms/" + roomId + "/suggestions/" + key + "/votes/" + voteId
+                  'rooms/' + roomId + '/suggestions/' + key + '/votes/' + voteId
                 )
                 .remove()
             }
@@ -55,11 +56,22 @@ export default class Suggestion extends React.Component {
 
   render() {
     return (
-      <List.Item style={styles.container} onClick={() => this.onPlacingVote()}>
+      <List.Item
+        className="cardShadow"
+        style={{
+          ...styles.container,
+          ...{
+            backgroundColor: Object.keys(this.props.votes).length
+              ? colors.PRIMARY_TRANSPARENT
+              : '#ffffff'
+          }
+        }}
+        onClick={() => this.onPlacingVote()}
+      >
         <Icon name="thumbs up outline" />
-        <List.Content>
+        <List.Content style={styles.content}>
           <List.Header>
-            {this.props.text} &nbsp;&nbsp;&nbsp;{" "}
+            {this.props.text} &nbsp;&nbsp;&nbsp;{' '}
             {Object.keys(this.props.votes).length}
           </List.Header>
         </List.Content>
@@ -70,6 +82,13 @@ export default class Suggestion extends React.Component {
 
 const styles = {
   container: {
-    fontSize: "2em"
-  }
+    fontSize: '2em',
+    margin: '2px',
+    borderRadius: '5px',
+    padding: '5px',
+    paddingLeft: '15px',
+    display: 'flex',
+    minWidth: '350px'
+  },
+  content: {}
 }

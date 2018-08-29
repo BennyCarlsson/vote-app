@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #f7f7f7;
 }
 
 .App-logo {
@@ -29,4 +30,15 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/*=========== CUSTOM STYLE ===========*/
+
+.questionInput input {
+  text-align: center !important;
+  font-style: italic;
+}
+
+.cardShadow {
+  box-shadow: rgb(204, 204, 204) 0px 1px 2px;
 }

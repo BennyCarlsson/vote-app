@@ -1,12 +1,12 @@
-import React from "react"
-import Question from "./components/question"
-import AddSuggestion from "./components/AddSuggestion"
-import { getQueryParameter } from "../utils/urlParser"
-import SuggestionList from "./components/SuggestionList"
-import CountDown from "./components/countDown"
-import firebase from "firebase"
-import Result from "./components/result"
-import { NO_ROOM_FOUND } from "../constants/errorCodes"
+import React from 'react'
+import Question from './components/question'
+import AddSuggestion from './components/AddSuggestion'
+import { getQueryParameter } from '../utils/urlParser'
+import SuggestionList from './components/SuggestionList'
+import CountDown from './components/countDown'
+import firebase from 'firebase'
+import Result from './components/result'
+import { NO_ROOM_FOUND } from '../constants/errorCodes'
 
 export default class RoomPage extends React.Component {
   constructor(props) {
@@ -18,17 +18,17 @@ export default class RoomPage extends React.Component {
     }
   }
   componentDidMount() {
-    const roomId = getQueryParameter("room")
+    const roomId = getQueryParameter('room')
     this.setState({ roomId })
     firebase
       .database()
-      .ref("rooms/" + roomId + "/expires")
-      .once("value")
+      .ref('rooms/' + roomId + '/expires')
+      .once('value')
       .then(snapshot => {
         const expirationTime = snapshot.val()
         this.setState({ expirationTime })
         if (!expirationTime) {
-          window.location.href = "/?errorCode=" + NO_ROOM_FOUND
+          window.location.href = '/?errorCode=' + NO_ROOM_FOUND
         }
       })
   }
@@ -60,12 +60,14 @@ export default class RoomPage extends React.Component {
                 />
               </div>
             </div>
-            <div style={styles.pageContent}>
-              <Question roomId={this.state.roomId} />
-            </div>
-            <div style={styles.pageContent}>
-              <SuggestionList style={StyleSheet.suggestionList} />
-              <AddSuggestion />
+            <div style={styles.pageContentContainer}>
+              <div style={styles.pageContent}>
+                <Question roomId={this.state.roomId} />
+              </div>
+              <div style={styles.pageContent}>
+                <SuggestionList style={StyleSheet.suggestionList} />
+                <AddSuggestion />
+              </div>
             </div>
           </div>
         )}
@@ -76,29 +78,40 @@ export default class RoomPage extends React.Component {
 
 const styles = {
   container: {
-    height: "100vh",
-    display: "flex",
+    height: '100vh',
+    display: 'flex',
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between"
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   },
   disabledStyle: {
-    backgroundColor: "#af3333"
+    backgroundColor: '#af3333'
   },
   suggestionList: {
-    alignItems: "center"
+    alignItems: 'center',
+    overFlowY: 'scroll'
+  },
+  pageContentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '50vh',
+    justifyContent: 'space-between'
   },
   pageContent: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    flexDirection: "column"
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '25px'
   },
   headerSection: {
-    display: "flex",
+    display: 'flex',
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginLeft: "10%",
-    marginRight: "10%"
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginLeft: '10%',
+    marginRight: '10%'
   }
 }

@@ -1,13 +1,13 @@
-import React from "react"
-import firebase from "firebase"
-import { Input, Form } from "semantic-ui-react"
-import { getQueryParameter } from "../../utils/urlParser"
+import React from 'react'
+import firebase from 'firebase'
+import { Input, Form } from 'semantic-ui-react'
+import { getQueryParameter } from '../../utils/urlParser'
 
 export default class AddSuggestion extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      newSuggestion: "",
+      newSuggestion: '',
       roomRef: undefined
     }
   }
@@ -15,7 +15,7 @@ export default class AddSuggestion extends React.Component {
   componentDidMount() {
     const ref = firebase
       .database()
-      .ref("rooms/" + getQueryParameter("room") + "/suggestions")
+      .ref('rooms/' + getQueryParameter('room') + '/suggestions')
     this.setState({ roomRef: ref })
   }
 
@@ -26,7 +26,7 @@ export default class AddSuggestion extends React.Component {
         votes: 0
       })
     }
-    this.setState({ newSuggestion: "" })
+    this.setState({ newSuggestion: '' })
   }
 
   render() {
@@ -36,12 +36,13 @@ export default class AddSuggestion extends React.Component {
           <Form.Field>
             <Input
               icon={{
-                name: "send",
+                name: 'send',
                 link: true,
-                size: "large",
-                style: { color: "#4dd0e1" },
+                size: 'large',
+                style: { color: '#4dd0e1' },
                 onClick: () => this.onAddingSuggestion()
               }}
+              size="massive"
               placeholder="Add new suggestion"
               onChange={e => this.setState({ newSuggestion: e.target.value })}
               value={this.state.newSuggestion}

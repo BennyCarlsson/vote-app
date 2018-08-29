@@ -1,8 +1,8 @@
-import React from "react"
-import firebase from "firebase"
-import { getQueryParameter } from "../../utils/urlParser"
-import Suggestion from "./Suggestion"
-import { List } from "semantic-ui-react"
+import React from 'react'
+import firebase from 'firebase'
+import { getQueryParameter } from '../../utils/urlParser'
+import Suggestion from './Suggestion'
+import { List } from 'semantic-ui-react'
 
 export default class SuggestionList extends React.Component {
   constructor(props) {
@@ -18,10 +18,10 @@ export default class SuggestionList extends React.Component {
   }
 
   initDatabaseSocket = () => {
-    const ref = firebase.database().ref("rooms/" + getQueryParameter("room"))
+    const ref = firebase.database().ref('rooms/' + getQueryParameter('room'))
     this.setState({ roomRef: ref })
 
-    ref.on("value", snapshot => {
+    ref.on('value', snapshot => {
       const value = snapshot.val()
       if (value) {
         this.setState({ suggestions: value.suggestions })
@@ -31,7 +31,7 @@ export default class SuggestionList extends React.Component {
 
   render() {
     return (
-      <List animated verticalAlign="middle">
+      <List>
         {this.state.suggestions ? (
           Object.keys(this.state.suggestions).map((suggestionKey, index) => (
             <Suggestion
@@ -42,7 +42,7 @@ export default class SuggestionList extends React.Component {
             />
           ))
         ) : (
-          <p>inget</p>
+          <div />
         )}
       </List>
     )
