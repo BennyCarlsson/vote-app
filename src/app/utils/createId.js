@@ -1,5 +1,5 @@
 import firebase from "firebase"
-import easyReadIds from "easy-read-ids"
+import easyReadIds from "./easy-read-ids"
 
 export const getNewId = async () => {
   // getIdSpaces = 111188000
