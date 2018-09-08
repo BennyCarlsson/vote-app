@@ -1,7 +1,7 @@
 import React from "react"
 import firebase from "firebase"
 import { Input, Form } from "semantic-ui-react"
-import { addUrlParameter } from "../../utils"
+import { addUrlParameter, capitalizeRoomId } from "../../utils"
 import { Page } from "../../constants/page"
 import { NO_ROOM_FOUND } from "../../constants/errorCodes"
 

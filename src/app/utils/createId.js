@@ -1,41 +1,12 @@
 import firebase from "firebase"
+import easyReadIds from "easy-read-ids"
 
 export const getNewId = async () => {
-  let words = [
-    "Teddybear",
-    "Goldfish",
-    "Killer",
-    "Slayer",
-    "Joker",
-    "TheThird",
-    "Eagle",
-    "Freedom",
-    "Mario",
-    "ButterFly",
-    "Flying",
-    "Car",
-    "Drunk",
-    "Santa",
-    "Rock",
-    "Fast",
-    "Jumping",
-    "Super",
-    "Awesome",
-    "Ok",
-    "Perfect",
-    "Lame",
-    "Salmon",
-    "Bike",
-    "Girl",
-    "Boy",
-    "Lord",
-    "Dog",
-    "Cat"
-  ]
-  const newId =
-    words[Math.floor(Math.random() * words.length)] +
-    words[Math.floor(Math.random() * words.length)] +
-    words[Math.floor(Math.random() * words.length)]
+  // getIdSpaces = 111188000
+  const newId = easyReadIds.generate(
+    ["adjective", "color", "animal", "number"],
+    100
+  )
   let exists = false
   await firebase
     .database()

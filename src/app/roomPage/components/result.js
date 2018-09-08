@@ -4,8 +4,7 @@ import { getQueryParameter } from "../../utils/urlParser"
 import {
   Segment,
   Dimmer,
-  Loader,
-  Image
+  Loader
 } from "../../../../node_modules/semantic-ui-react"
 import colors from "../../constants/colors"
 
